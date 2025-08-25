@@ -1,6 +1,9 @@
+# Imports
 library(dplyr)
 library(Lahman)
-library(stats)
+
+# My modules
+source("scripts/constants.R")
 
 # Starting year - only do Statcast era for now.
 min_year <- 2015
@@ -10,13 +13,4 @@ min_year <- 2015
 lin_reg_fields_data_raw <- Teams |>
   filter(yearID >= min_year, yearID != 2020)
 
-saveRDS(lin_reg_fields_data_raw, "outputs/data/01_lin_reg_fields_data_raw")
-
-  
-
-
-
-
-
-
-
+saveRDS(lin_reg_fields_data_raw, STEP_1_OUTPUT_FILE)
