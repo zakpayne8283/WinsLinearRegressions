@@ -1,8 +1,5 @@
 # Imports
-library(broom)
 library(dplyr)
-library(Lahman)
-library(stats)
 
 # My modules
 source("scripts/constants.R")
