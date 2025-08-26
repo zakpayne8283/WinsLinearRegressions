@@ -8,11 +8,12 @@ source("scripts/constants.R")
 lin_reg_fields_data <- readRDS(STEP_2_OUTPUT_FILE)
 
 # Extrapolate the teams' run diffs and win percents
-team_rundiff_winpct <- lin_reg_fields_data |>
+calculated_lin_reg_data <- lin_reg_fields_data |>
   mutate(
     win_percentage = W / (W + L),
-    run_differential = R - RA
+    run_differential = R - RA,
+    strikeout_rate = SO / (AB + BB + HBP + SF)
   ) |>
-  select(teamID, yearID, lgID, win_percentage, run_differential)
+  select(teamID, yearID, lgID, win_percentage, run_differential, strikeout_rate)
 
-saveRDS(team_rundiff_winpct, STEP_3_OUTPUT_FILE)
+saveRDS(calculated_lin_reg_data, STEP_3_OUTPUT_FILE)
