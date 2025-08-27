@@ -1,110 +1,112 @@
 library(ggplot2)
 library(ggpmisc)
+library(gridExtra)
 
 # My modules
 source("scripts/constants.R")
+
+# =========
+# FUNCTIONS
+# =========
+
+# Generates a scatterplot for the provided data
+generate_scatterplot <- function(source_data, x_axis, y_axis, x_axis_title, y_axis_title, chart_title, file_name) { # nolint
+  plot_to_save <-
+    ggplot(source_data, aes(x = {{x_axis}}, y = {{y_axis}})) +
+    geom_point() +
+    labs(
+      x = x_axis_title,
+      y = y_axis_title,
+      title = chart_title
+    ) +
+    geom_smooth(method = "lm", se = FALSE, color = "blue") +
+    stat_poly_eq(
+      aes(label = paste(..rr.label.., sep = "~~~")), # nolint
+      formula = y ~ x,
+      parse = TRUE
+    )
+
+  # Save the plot
+  ggsave(
+    file_name,
+    plot = plot_to_save,
+    width = 8,
+    height = 6,
+    dpi = 500
+  )
+}
+
+generate_data_table <- function(source_data, file_name) {
+  # New Image
+  png(file_name, width = 800, height = 600)
+
+  # Draw the table
+  grid.table(source_data)
+
+  # Close the device
+  dev.off()
+}
 
 # Load metric'd data from step 3
 calculated_team_data <- readRDS(STEP_3_OUTPUT_FILE)
 
 # Load data from step 4
-win_pct_run_diff_linreg_yearly <- readRDS(STEP_4_OUTPUT_FILE_RUN_DIFF)
-w_pct_so_pct_linreg_yearly <- readRDS(STEP_4_OUTPUT_FILE_SO_PERCT)
+correlations <- readRDS(STEP_4_OUTPUT_FILE_CORRELATIONS)
 
-# Scatter plot of Differential vs Win %
-plot_to_save <-
-  ggplot(calculated_data, aes(x = win_percentage, y = run_differential)) +
-  geom_point() +
-  labs(
-    x = "Win Percentage",
-    y = "Run Differential",
-    title = "Run Differential vs Win Percentage"
-  ) +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  stat_poly_eq(
-    aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),
-    formula = y ~ x,
-    parse = TRUE
-  )
+# Generate a table of the correlations
+generate_data_table(correlations, TABLE_CORRELATIONS_FILE)
 
-# Save the plot
-ggsave(
-  PLOT_SCATTER_RUNDIFF_WPCT_FILE,
-  plot = plot_to_save,
-  width = 8,
-  height = 6,
-  dpi = 300
+# Scatter plot of Runs vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = R,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Runs Scored",
+  chart_title = "Runs Scored vs. Win Percentage",
+  PLOT_SCATTER_R_WPCT_FILE
 )
 
-# Plot Run Differential
-plot_to_save <-
-  ggplot(win_pct_run_diff_linreg_yearly, aes(x = yearID, y = estimate)) +
-  geom_point() +
-  labs(
-    x = "Year",
-    y = "Effect of Run Differential on Win % (slope)",
-    title = "Yearly regression slopes: Win% ~ Run Differential"
-  ) +
-  scale_y_continuous(
-    limits = c(0, max(win_pct_run_diff_linreg_yearly$estimate, na.rm = TRUE))
-  ) +
-  geom_smooth(method="lm", se = FALSE, color = "blue")
+# Scatter plot of Runs Against vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = RA,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Runs Against",
+  chart_title = "Runs Against vs. Win Percentage",
+  PLOT_SCATTER_RA_WPCT_FILE
+)
 
-# Save the chart
-ggsave(
-  PLOT_RUNDIFF_REGRESSION_FILE,
-  plot = plot_to_save,
-  width = 8,
-  height = 6,
-  dpi = 300
+# Scatter plot of Differential vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = run_differential,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Run Differntial",
+  "Run Differential vs. Win Percentage",
+  PLOT_SCATTER_RUNDIFF_WPCT_FILE
 )
 
 # Scatter plot of SO % vs Win %
-plot_to_save <-
-  ggplot(calculated_data, aes(x = win_percentage, y = strikeout_rate)) +
-  geom_point() +
-  labs(
-    x = "Win Percentage",
-    y = "SO %",
-    title = "SO% vs Win Percentage"
-  ) +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  stat_poly_eq(
-    aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),
-    formula = y ~ x,
-    parse = TRUE
-  )
-
-# Save the plot
-ggsave(
-  PLOT_SCATTER_SOPCT_WPCT_FILE,
-  plot = plot_to_save,
-  width = 8,
-  height = 6,
-  dpi = 300
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = strikeout_rate,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "SO %",
+  chart_title = "SO % vs. Win Percentage",
+  PLOT_SCATTER_SOPCT_WPCT_FILE
 )
 
-# Plot SO Rate
-plot_to_save <-
-  ggplot(w_pct_so_pct_linreg_yearly, aes(x = yearID, y = estimate)) +
-  geom_point() +
-  labs(
-    x = "Year",
-    y = "Effect of SO (Batting) % on Win % (slope)",
-    title = "Yearly regression slopes: Win% ~ SO (Batting) %"
-  ) +
-  scale_y_continuous(
-    limits = c(
-        min(w_pct_so_pct_linreg_yearly$estimate, na.rm = TRUE),
-        max(w_pct_so_pct_linreg_yearly$estimate, na.rm = TRUE))
-  ) +
-  geom_smooth(method="lm", se = FALSE, color = "blue")
-
-# Save the chart
-ggsave(
-  PLOT_SOPERCT_REGRESSION_FILE,
-  plot = plot_to_save,
-  width = 8,
-  height = 6,
-  dpi = 300
+# Scatter plot of BB % vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = walk_percentage,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "BB %",
+  chart_title = "BB % vs. Win Percentage",
+  PLOT_SCATTER_SOPCT_WPCT_FILE
 )

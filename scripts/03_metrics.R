@@ -12,8 +12,19 @@ calculated_team_data <- extracted_team_data |>
   mutate(
     win_percentage = W / (W + L),
     run_differential = R - RA,
-    strikeout_rate = SO / (AB + BB + HBP + SF) # TODO: Rename this to so_pecentage # nolint 
+    strikeout_rate = SO / (AB + BB+ HBP + SF), # TODO: Rename this to so_pecentage # nolint
+    walk_percentage = BB / (AB + BB + HBP + SF)
   ) |>
-  select(teamID, yearID, lgID, win_percentage, run_differential, strikeout_rate)
+  select(
+    teamID,
+    yearID,
+    lgID,
+    R,
+    RA,
+    win_percentage,
+    run_differential,
+    strikeout_rate,
+    walk_percentage
+  )
 
 saveRDS(calculated_team_data, STEP_3_OUTPUT_FILE)
