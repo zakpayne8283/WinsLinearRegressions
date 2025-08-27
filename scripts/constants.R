@@ -1,4 +1,6 @@
+# ==========
 # Data Files
+# ==========
 
 # STEP 01
 # Raw Lahman::Batting output
@@ -20,5 +22,10 @@ STEP_4_OUTPUT_FILE_RUN_DIFF <- "outputs/data/04_win_pct_run_diff_linreg_yearly.r
 # Year-by-year linear regression of SO % (Batting) on Win %
 STEP_4_OUTPUT_FILE_SO_PERCT <- "outputs/data/04_w_pct_so_pct_linreg_yearly.rds" # nolint
 
+# =====
+# Plots
+# =====
 PLOT_RUNDIFF_REGRESSION_FILE <- "outputs/plots/run_diff_regression_yearly.png" # nolint
+PLOT_SCATTER_RUNDIFF_WPCT_FILE <- "outputs/plots/run_diff_wpct_scatter.png" # nolint
 PLOT_SOPERCT_REGRESSION_FILE <- "outputs/plots/so_prct_regression_yearly.png" # nolint
+PLOT_SCATTER_SOPCT_WPCT_FILE <- "outputs/plots/sopct_wpct_scatter.png" # nolint
