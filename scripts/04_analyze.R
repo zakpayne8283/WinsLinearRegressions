@@ -7,10 +7,10 @@ library(stats)
 source("scripts/constants.R")
 
 # Get the data from Step 03
-calculated_lin_reg_data <- readRDS(STEP_3_OUTPUT_FILE)
+calculated_data <- readRDS(STEP_3_OUTPUT_FILE)
 
 # Run a linear regression on Run Diff / Win %
-w_pct_run_diff_linreg <- calculated_lin_reg_data |>
+win_pct_run_diff_linreg_yearly <- calculated_data |>
   # Group by each year, then
   group_by(yearID) |>
   # Loop each year, doing a linear regression
@@ -23,7 +23,7 @@ w_pct_run_diff_linreg <- calculated_lin_reg_data |>
   select(yearID, estimate)
 
 # Run a linear regression on SO % / Win %
-w_pct_so_percent_linreg <- calculated_lin_reg_data |>
+w_pct_so_pct_linreg_yearly <- calculated_data |>
   # For each year,
   group_by(yearID) |>
   # Do a linear regression to get the values for that year
@@ -35,5 +35,5 @@ w_pct_so_percent_linreg <- calculated_lin_reg_data |>
   select(yearID, estimate)
 
 # Save to a file
-saveRDS(w_pct_run_diff_linreg, STEP_4_OUTPUT_FILE_RUN_DIFF)
-saveRDS(w_pct_so_percent_linreg, STEP_4_OUTPUT_FILE_SO_PERCT)
+saveRDS(win_pct_run_diff_linreg_yearly, STEP_4_OUTPUT_FILE_RUN_DIFF)
+saveRDS(w_pct_so_pct_linreg_yearly, STEP_4_OUTPUT_FILE_SO_PERCT)
