@@ -51,10 +51,14 @@ generate_data_table <- function(source_data, file_name) {
 calculated_team_data <- readRDS(STEP_3_OUTPUT_FILE)
 
 # Load data from step 4
-correlations <- readRDS(STEP_4_OUTPUT_FILE_CORRELATIONS)
+overall_correlations <- readRDS(STEP_4_OUTPUT_FILE_OVERALL_CORRELATIONS)
+offense_correlations <- readRDS(STEP_4_OUTPUT_FILE_OFFENSE_CORRELATIONS)
+defense_correlations <- readRDS(STEP_4_OUTPUT_FILE_DEFENSE_CORRELATIONS)
 
 # Generate a table of the correlations
-generate_data_table(correlations, TABLE_CORRELATIONS_FILE)
+generate_data_table(overall_correlations, TABLE_OVERALL_CORRELATIONS_FILE)
+generate_data_table(offense_correlations, TABLE_OFFENSE_CORRELATIONS_FILE)
+generate_data_table(defense_correlations, TABLE_DEFENSE_CORRELATIONS_FILE)
 
 # Scatter plot of Runs vs Win %
 generate_scatterplot(

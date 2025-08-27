@@ -18,11 +18,14 @@ STEP_3_OUTPUT_FILE <- "outputs/data/03_calculated_team_data.rds" # nolint
 # STEP 04
 # Data analyzed, ready for plotting
 # All correlations we've calculated
-STEP_4_OUTPUT_FILE_CORRELATIONS <- "outputs/data/04_all_correlations.rds" # nolint
+STEP_4_OUTPUT_FILE_OVERALL_CORRELATIONS <- "outputs/data/04_overall_correlations.rds" # nolint
+STEP_4_OUTPUT_FILE_OFFENSE_CORRELATIONS <- "outputs/data/04_offense_correlations.rds" # nolint
+STEP_4_OUTPUT_FILE_DEFENSE_CORRELATIONS <- "outputs/data/04_defense_correlations.rds" # nolint
 
 # =====
-# Plots
+# PLOTS
 # =====
+
 PLOT_SCATTER_R_WPCT_FILE <- "outputs/plots/r_wpct_scatter.png" # nolint
 PLOT_SCATTER_H_WPCT_FILE <- "outputs/plots/h_wpct_scatter.png" # nolint
 PLOT_SCATTER_X2B_WPCT_FILE <- "outputs/plots/x2b_wpct_scatter.png" # nolint
@@ -37,4 +40,7 @@ PLOT_SCATTER_BBPCT_WPCT_FILE <- "outputs/plots/bbpct_wpct_scatter.png" # nolint
 # ======
 # TABLES
 # ======
-TABLE_CORRELATIONS_FILE <- "outputs/tables/correlations.png" # nolint
+
+TABLE_OVERALL_CORRELATIONS_FILE <- "outputs/tables/overall_correlations.png" # nolint
+TABLE_OFFENSE_CORRELATIONS_FILE <- "outputs/tables/offense_correlations.png" # nolint
+TABLE_DEFENSE_CORRELATIONS_FILE <- "outputs/tables/defense_correlations.png" # nolint
