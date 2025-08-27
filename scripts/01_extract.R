@@ -8,6 +8,8 @@ source("scripts/constants.R")
 # Starting year - only do Statcast era for now.
 min_year <- 2015
 
+names(Teams)
+
 # Just get the data we want to check for creating associations with
 # what produces wins for a team
 team_data_raw <- Teams |>

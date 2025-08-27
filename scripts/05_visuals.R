@@ -67,6 +67,50 @@ generate_scatterplot(
   PLOT_SCATTER_R_WPCT_FILE
 )
 
+# Scatter plot of Hits vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = H,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Hits",
+  chart_title = "Team Hits vs. Win Percentage",
+  PLOT_SCATTER_H_WPCT_FILE
+)
+
+# Scatter plot of Doubles vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = X2B,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Doubles",
+  chart_title = "Team Doubles vs. Win Percentage",
+  PLOT_SCATTER_X2B_WPCT_FILE
+)
+
+# Scatter plot of Triples vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = X3B,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Triples",
+  chart_title = "Team Triples vs. Win Percentage",
+  PLOT_SCATTER_X3B_WPCT_FILE
+)
+
+# Scatter plot of HRs vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = HR,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Home Runs",
+  chart_title = "Team Home Runs vs. Win Percentage",
+  PLOT_SCATTER_HR_WPCT_FILE
+)
+
 # Scatter plot of Runs Against vs Win %
 generate_scatterplot(
   source_data = calculated_data,
@@ -89,6 +133,17 @@ generate_scatterplot(
   PLOT_SCATTER_RUNDIFF_WPCT_FILE
 )
 
+# Scatter plot of Team Batting Average vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = batting_average,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Batting Average",
+  chart_title = "Team Batting Average vs. Win Percentage",
+  PLOT_SCATTER_BAVG_WPCT_FILE
+)
+
 # Scatter plot of SO % vs Win %
 generate_scatterplot(
   source_data = calculated_data,
@@ -108,5 +163,5 @@ generate_scatterplot(
   x_axis_title = "Win Percentage",
   y_axis_title = "BB %",
   chart_title = "BB % vs. Win Percentage",
-  PLOT_SCATTER_SOPCT_WPCT_FILE
+  PLOT_SCATTER_BBPCT_WPCT_FILE
 )

@@ -13,8 +13,13 @@ calculated_data <- readRDS(STEP_3_OUTPUT_FILE)
 # All of the predictors that might be looked at
 predictors <- c(
   "R",
+  "H",
+  "X2B",
+  "X3B",
+  "HR",
   "RA",
   "run_differential",
+  "batting_average",
   "strikeout_rate",
   "walk_percentage"
 )
@@ -30,7 +35,8 @@ correlations <- map_dfr(predictors, function(pred) {
   )
 })
 
-correlations
+correlations <- correlations |>
+  arrange(desc(r.squared))
 
 # Save to a file
 saveRDS(correlations, STEP_4_OUTPUT_FILE_CORRELATIONS)
