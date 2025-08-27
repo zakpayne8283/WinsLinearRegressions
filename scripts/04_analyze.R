@@ -47,7 +47,15 @@ offense_predictors <- c(
   "X2B",
   "X3B",
   "HR",
+  "SB",
+  "CS",
+  "BB",
+  "SO",
   "batting_average",
+  "onbase_percentage",
+  "slugging_percentage",
+  "ops",
+  "stolenbase_percentage",
   "strikeout_rate",
   "walk_percentage"
 )

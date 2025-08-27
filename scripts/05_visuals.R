@@ -115,6 +115,28 @@ generate_scatterplot(
   PLOT_SCATTER_HR_WPCT_FILE
 )
 
+# Scatter plot of SBs vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = SB,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Stolen Bases",
+  chart_title = "Team Stolen Bases vs. Win Percentage",
+  PLOT_SCATTER_SB_WPCT_FILE
+)
+
+# Scatter plot of CSs vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = CS,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Caught Stealings",
+  chart_title = "Team Caught Stealings vs. Win Percentage",
+  PLOT_SCATTER_CS_WPCT_FILE
+)
+
 # Scatter plot of Runs Against vs Win %
 generate_scatterplot(
   source_data = calculated_data,
@@ -146,6 +168,39 @@ generate_scatterplot(
   y_axis_title = "Batting Average",
   chart_title = "Team Batting Average vs. Win Percentage",
   PLOT_SCATTER_BAVG_WPCT_FILE
+)
+
+# Scatter plot of Team Onbase % vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = onbase_percentage,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "OBP",
+  chart_title = "Team On-Base Percentage vs. Win Percentage",
+  PLOT_SCATTER_OBP_WPCT_FILE
+)
+
+# Scatter plot of Team Slugging vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = slugging_percentage,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "Slugging Percentage",
+  chart_title = "Team Slugging Percentage vs. Win Percentage",
+  PLOT_SCATTER_SLG_WPCT_FILE
+)
+
+# Scatter plot of Team OPS vs Win %
+generate_scatterplot(
+  source_data = calculated_data,
+  x_axis = win_percentage,
+  y_axis = batting_average,
+  x_axis_title = "Win Percentage",
+  y_axis_title = "OPS",
+  chart_title = "Team OPS vs. Win Percentage",
+  PLOT_SCATTER_OPS_WPCT_FILE
 )
 
 # Scatter plot of SO % vs Win %

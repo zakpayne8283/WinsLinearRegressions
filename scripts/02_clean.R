@@ -25,6 +25,8 @@ extracted_team_data <- team_data_raw |>
     X2B,
     X3B,
     HR,
+    SB,
+    CS,
     BB,
     HBP,
     SF,
